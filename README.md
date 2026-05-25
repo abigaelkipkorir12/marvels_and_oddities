@@ -6,7 +6,7 @@ As humans, we tend to, or atleast I tend to hyperfixate on the negative things t
 
 ---
 
-## 🌟 The Core Concept
+##  The Core Concept
 
 *   **The Problem:** Daily inconveniences easily overshadow small moments of joy, distorting our perception of how our days actually went.
 *   **The Solution:** A dedicated, highly visual daily journal that balances perspective. By looking back at the history of your entries, the "oddities" lose their weight, and the "marvels" become a permanent archive of gratitude.
@@ -14,7 +14,7 @@ As humans, we tend to, or atleast I tend to hyperfixate on the negative things t
 
 ---
 
-## 🛠️ Key Features
+##  Key Features
 
 *   **Daily Log:** Record your Marvels and Oddities side-by-side every day.
 *   **Happiness Index:** Rate your overall day on a quantitative scale from `1` to `5`.
@@ -24,7 +24,7 @@ As humans, we tend to, or atleast I tend to hyperfixate on the negative things t
 
 ---
 
-## 🏗️ Technical Architecture & Control
+##  Technical Architecture & Control
 
 *To maintain maximum technical and creative control over this project, the architecture is designed to be lean, modular, and deeply understood from the ground up.*
 
