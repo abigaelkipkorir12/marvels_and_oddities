@@ -29,8 +29,8 @@ As humans, we tend to, or atleast I tend to hyperfixate on the negative things t
 *To maintain maximum technical and creative control over this project, the architecture is designed to be lean, modular, and deeply understood from the ground up.*
 
 ### Planned Tech Stack
-*   **Frontend:** [e.g., React / Next.js / Swift / Flutter] — Focused on a clean, intentional, and high-concept visual user experience.
-*   **Backend/Database:** [e.g., Node.js / Firebase / Local Storage / PostgreSQL] — Lightweight data storage for swift tracking of text strings, integers (1-5), and timestamps.
+*   **Frontend:** [React Native] — Focused on a clean, intentional, and high-concept visual user experience.
+*   **Backend/Database:** [Supabase/ PostgreSQL] — Lightweight data storage for swift tracking of text strings, integers (1-5), and timestamps.
 
 ### Data Model
 Every daily entry consists of a simple, clean payload:
