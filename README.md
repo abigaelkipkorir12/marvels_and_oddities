@@ -1,45 +1,166 @@
-# Marvels & Oddities Journal
+# Marvels & Oddities
 
-A daily mindfulness and reflection application inspired by S.K. Ali’s novel *Love from A to Z*. 
+*A personal full-stack mobile journaling application inspired by a reflection practice from S.K. Ali's* Love from A to Z.
 
-As humans, we tend to, or atleast I tend to hyperfixate on the negative things that happen making us lose the joy of the small good things that happen to us on a daily. This project is a digital space designed to counteract that bias—forcing a daily pause to record life's **Marvels** (the small joys, wonders, and victories) alongside its **Oddities** (the challenges, weirdness, and minor setbacks), backed by a quantitative happiness scale and a streak-based motivation system.
-
----
-
-##  The Core Concept
-
-*   **The Problem:** Daily inconveniences easily overshadow small moments of joy, distorting our perception of how our days actually went.
-*   **The Solution:** A dedicated, highly visual daily journal that balances perspective. By looking back at the history of your entries, the "oddities" lose their weight, and the "marvels" become a permanent archive of gratitude.
-*   **The Origin:** This project evolved from a personal Google Form  I used to navigate and appreciate my first year at Duke. This app elevates that practice into a dedicated, frictionless, and rewarding experience.
+Built with **React Native, Supabase, and PostgreSQL**.
 
 ---
 
-##  Key Features
+## Overview
 
-*   **Daily Log:** Record your Marvels and Oddities side-by-side every day.
-*   **Happiness Index:** Rate your overall day on a quantitative scale from `1` to `5`.
-*   **Streak Mechanic:** A gamified incentive system that tracks consistency, encouraging you to keep your reflection habit alive.
-*   **Reflection History:** An archive view to look back at past entries, helping you realize the insignificance of past bad days and the abundance of small good moments.
-*   **Whimsical Aesthetic:** A cozy, warm, and comforting user experience designed to feel like a digital safe haven channeling Winnie the Pooh(without infringing on copyright!).
+Marvels & Oddities is a personal reflection application designed to help users capture both the positive and difficult moments of everyday life.
+
+The application encourages users to record:
+
+* A **Marvel** — something meaningful, joyful, or worth appreciating.
+* An **Oddity** — something frustrating, difficult, or unexpected.
+* A daily mood rating on a scale from 1–5.
+
+Over time, these entries form a personal archive that helps users gain perspective on challenges while preserving moments that might otherwise be forgotten.
 
 ---
 
-##  Technical Architecture & Control
+## Why I Built This
 
-*To maintain maximum technical and creative control over this project, the architecture is designed to be lean, modular, and deeply understood from the ground up.*
+Before moving from Kenya to attend Duke University, I read *Love from A to Z*, a novel that introduced the idea of recording life's "Marvels" and "Oddities."
 
-### Planned Tech Stack
-*   **Frontend:** [React Native] — Focused on a clean, intentional, and high-concept visual user experience.
-*   **Backend/Database:** [Supabase/ PostgreSQL] — Lightweight data storage for swift tracking of text strings, integers (1-5), and timestamps.
+At the time, I was preparing for a major transition—leaving home, moving across the world, and starting university in a completely unfamiliar environment.
 
-### Data Model
-Every daily entry consists of a simple, clean payload:
+Inspired by the book, I created a simple Google Form to record one Marvel, one Oddity, and my overall mood each day. What started as a personal habit became an unexpectedly valuable way to maintain perspective during my first year at Duke.
+
+Reviewing old entries revealed something interesting: many of the problems that once felt overwhelming had faded in importance, while small moments of gratitude, growth, and connection remained meaningful.
+
+Marvels & Oddities transforms that reflection practice into a dedicated mobile application.
+
+---
+
+## Current Features
+
+### Daily Journaling
+
+Record daily Marvels and Oddities through a structured reflection workflow.
+
+### Mood Tracking
+
+Rate each day on a scale from 1–5.
+
+### Journal History
+
+Browse previous entries and revisit past reflections.
+
+### Cloud Persistence
+
+Entries are stored using Supabase and PostgreSQL for persistent storage.
+
+### Mobile-First Experience
+
+Designed and developed using React Native with a focus on simplicity, comfort, and consistency.
+
+---
+
+## Technical Stack
+
+### Frontend
+
+* React Native
+
+### Backend
+
+* Supabase
+
+### Database
+
+* PostgreSQL
+
+---
+
+## Architecture
+
+```text
+React Native App
+        ↓
+     Supabase
+        ↓
+   PostgreSQL
+```
+
+Example journal entry:
+
 ```json
 {
-  "id": "unique_entry_id",
-  "date": "YYYY-MM-DD",
-  "happiness_rating": 4,
-  "marvels": ["Found a great study spot", "Had a great conversation with a friend"],
-  "oddities": ["Spilled a bit of coffee", "Heavy rain on the walk to class"],
-  "streak_count": 12
+  "id": "entry_id",
+  "date": "2026-06-07",
+  "mood_rating": 4,
+  "marvel": "Had a meaningful conversation with a friend",
+  "oddity": "Missed my bus to class"
 }
+```
+
+---
+
+## Key Technical Concepts Demonstrated
+
+* Mobile Application Development
+* Full-Stack Development
+* RESTful Backend Integration
+* Database Design
+* PostgreSQL
+* Cloud Data Persistence
+* CRUD Operations
+* State Management
+* User-Centered Product Design
+* React Native Development
+
+---
+
+## Current Development Status
+
+### Implemented
+
+* Journal creation
+* Marvel/Oddity entries
+* Mood tracking
+* Historical journal archive
+* Supabase integration
+* PostgreSQL persistence
+
+### In Progress
+
+* Photo uploads for daily highlights
+* Reflection streak tracking
+* Additional UI refinement
+
+### Planned
+
+* Weekly and monthly reflection summaries
+* Mood analytics and trend visualization
+* Search and filtering by date range
+* Push notification reminders
+* Reflection streak rewards
+* "On This Day" memory resurfacing
+
+---
+
+## Challenges & Lessons Learned
+
+This project reinforced the importance of building software around a genuine user need rather than a technical requirement.
+
+While the application itself focuses on journaling, the development process required designing database schemas, integrating cloud services, managing application state, and creating an experience users would want to return to consistently.
+
+Perhaps the most important lesson was discovering how a simple personal habit can evolve into a software product with meaningful impact.
+
+---
+
+## Project Status
+
+Marvels & Oddities is currently an actively developed personal project and is not yet publicly deployed.
+
+Future development will focus on completing remaining features, improving user experience, and preparing the application for broader distribution.
+
+---
+
+## Author
+
+Built by Abigael Chemutai Kipkorir
+
+Duke University
