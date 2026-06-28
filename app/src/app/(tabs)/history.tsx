@@ -60,7 +60,6 @@ export default function HistoryScreen() {
         <Text style={globalStyles.heroQuote}>
           Your marvels and oddities over time.
         </Text>
-
         {journals.length === 0 ? (
           <Text style={globalStyles.empty}>
             No journal entries yet.
