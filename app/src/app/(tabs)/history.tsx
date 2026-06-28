@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Alert, ScrollView, Text, View } from 'react-native';
 
 import { globalStyles } from '@/styles/global';
@@ -8,9 +8,6 @@ import { supabase } from '../../utils/supabaseClient';
 export default function HistoryScreen() {
   const [journals, setJournals] = useState<any[]>([]);
 
-  useEffect(() => {
-    fetchJournals();
-  }, []);
 
   const fetchJournals = async () => {
     try {
