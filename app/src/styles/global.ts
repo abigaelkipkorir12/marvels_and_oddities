@@ -244,14 +244,21 @@ authContainer: {
   backgroundColor: colors.background,
 },
 
-logoutButton:{
-   alignSelf: 'center', 
-   marginTop: 20 
+logoutButton: {
+  alignSelf: 'center',
+  marginTop: spacing.xl,
+  paddingVertical: spacing.sm,
+  paddingHorizontal: spacing.lg,
+  borderRadius: radius.pill,
+  borderWidth: 1,
+  borderColor: colors.border,
+  backgroundColor: colors.white,
 },
 
-logoutText:{
-  color: colors.muted,
+logoutText: {
+  color: colors.textSecondary,
   fontSize: 15,
-}
+  fontWeight: '600',
+},
 
 });

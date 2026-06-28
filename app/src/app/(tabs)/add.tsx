@@ -1,6 +1,7 @@
 import * as Haptics from 'expo-haptics';
 import { useState } from 'react';
 import {
+  Alert,
   ScrollView,
   Text,
   TextInput,
@@ -16,36 +17,68 @@ export default function AddJournalScreen() {
   const [marvel, setMarvel] = useState('');
   const [oddity, setOddity] = useState('');
   const [mood, setMood] = useState<number | null>(null);
-  const [highlight, setHighlight] = useState('');
+ 
+
+
 
 const handleAddJournal = async () => {
   try {
+    //year month day format
+    const today = new Date().toISOString().split("T")[0];
+
+    //gets the currently authenticated user
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    //edge case
+    if (authError || !user) {
+      Alert.alert(
+        "Authentication Error",
+        "Please log in again before saving your journal."
+      );
+      return;
+    }
+    console.log("Current User ID:", user.id);
     const { data, error } = await supabase
-      .from('marvel_and_oddities')
+      .from("marvel_and_oddities")
       .insert([
         {
+          user_id: user.id, // journal with the logged in user
           marvel,
           oddity,
           mood,
+          date: today, 
         },
       ]);
 
-    console.log('DATA:', data);
-    console.log('ERROR:', error);
+    console.log("DATA:", data);
+    console.log("ERROR:", error);
 
     if (error) {
-      alert(error.message);
+      Alert.alert("Error", error.message);
       return;
     }
-    //physical vibration to help you know that your journal has been saved
-    await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 
-alert('Saved successfully!');
+    //physical vibration to help you know that your journal has been saved
+    await Haptics.notificationAsync(
+      Haptics.NotificationFeedbackType.Success
+    );
+
+    Alert.alert("Success", "Journal saved successfully!");
+
+    //clears the form after saving
+    setMarvel("");
+    setOddity("");
+    setMood(null);
+
   } catch (err) {
     console.error(err);
-    alert('Unexpected error');
+    Alert.alert("Error", "Unexpected error");
   }
 };
+
 
   return (
     <ScrollView style={globalStyles.screen}>

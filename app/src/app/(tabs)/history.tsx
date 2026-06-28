@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { Alert, ScrollView, Text, View } from 'react-native';
 
 import { globalStyles } from '@/styles/global';
 import { supabase } from '../../utils/supabaseClient';
@@ -12,14 +12,28 @@ export default function HistoryScreen() {
   }, []);
 
   const fetchJournals = async () => {
+    try {
+        
+        //gets the currently authenticated user
+        const {
+          data: { user },
+          error: authError,
+        } = await supabase.auth.getUser();
+    
+        //edge case
+        if (authError || !user) {
+          Alert.alert(
+            "Authentication Error",
+            "Please log in again before saving your journal."
+          );
+          return;
+        }
+       
     const { data, error } = await supabase
-      .from('marvel_and_oddities')
-      .select('*')
-      .order('inserted_at', { ascending: false });
-
-     console.log('History Data:', data);
-     console.log('History Error:', error);
-
+      .from("marvel_and_oddities")
+      .select("*")
+      .eq("user_id", user.id)
+      .order("inserted_at", { ascending: false });
 
     if (error) {
       console.log(error);
@@ -27,7 +41,14 @@ export default function HistoryScreen() {
     }
 
     setJournals(data || []);
-  };
+  }
+   catch (err) {
+  console.error(err);
+  Alert.alert(
+    "Error",
+    "Something unexpected went wrong."
+  );
+};
 
   return (
     <ScrollView style={globalStyles.screen}>
@@ -84,4 +105,5 @@ export default function HistoryScreen() {
       </View>
     </ScrollView>
   );
+}
 }
