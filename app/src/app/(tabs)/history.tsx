@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { Alert, ScrollView, Text, View } from 'react-native';
 
@@ -13,42 +14,41 @@ export default function HistoryScreen() {
 
   const fetchJournals = async () => {
     try {
-        
-        //gets the currently authenticated user
-        const {
-          data: { user },
-          error: authError,
-        } = await supabase.auth.getUser();
-    
-        //edge case
-        if (authError || !user) {
-          Alert.alert(
-            "Authentication Error",
-            "Please log in again before saving your journal."
-          );
-          return;
-        }
-       
-    const { data, error } = await supabase
-      .from("marvel_and_oddities")
-      .select("*")
-      .eq("user_id", user.id)
-      .order("inserted_at", { ascending: false });
+      //gets the currently authenticated user
+      const {
+        data: { user },
+        error: authError,
+      } = await supabase.auth.getUser();
 
-    if (error) {
-      console.log(error);
-      return;
+      //edge case
+      if (authError || !user) {
+        Alert.alert(
+          'Authentication Error',
+          'Please log in again before saving your journal.'
+        );
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from('marvel_and_oddities')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('inserted_at', { ascending: false });
+
+      if (error) {
+        console.log(error);
+        return;
+      }
+
+      setJournals(data || []);
+    } catch (err) {
+      console.error(err);
+      Alert.alert(
+        'Error',
+        'Something unexpected went wrong.'
+      );
     }
-
-    setJournals(data || []);
-  }
-   catch (err) {
-  console.error(err);
-  Alert.alert(
-    "Error",
-    "Something unexpected went wrong."
-  );
-};
+  };
 
   return (
     <ScrollView style={globalStyles.screen}>
@@ -106,4 +106,4 @@ export default function HistoryScreen() {
     </ScrollView>
   );
 }
-}
+
