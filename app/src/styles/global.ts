@@ -226,4 +226,21 @@ export const globalStyles = StyleSheet.create({
     paddingTop: 8,
     paddingBottom: 20,
   },
+  authInput: {
+  backgroundColor: colors.white,
+  borderRadius: radius.md,
+  padding: spacing.md,
+  fontSize: 16,
+  color: colors.text,
+  borderWidth: 1,
+  borderColor: colors.border,
+  marginBottom: spacing.md,
+},
+
+authContainer: {
+  flex: 1,
+  justifyContent: 'center',
+  paddingHorizontal: spacing.lg,
+  backgroundColor: colors.background,
+},
 });

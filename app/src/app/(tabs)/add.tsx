@@ -1,17 +1,18 @@
 import * as Haptics from 'expo-haptics';
 import { useState } from 'react';
 import {
-    ScrollView,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
 } from 'react-native';
 
 import { globalStyles } from '@/styles/global';
 import { supabase } from '../../utils/supabaseClient'; // adjust the path as needed
 
 export default function AddJournalScreen() {
+  //checks input state dynamically,constantly updating
   const [marvel, setMarvel] = useState('');
   const [oddity, setOddity] = useState('');
   const [mood, setMood] = useState<number | null>(null);
@@ -36,10 +37,8 @@ const handleAddJournal = async () => {
       alert(error.message);
       return;
     }
-   
-    await Haptics.notificationAsync(
-    Haptics.NotificationFeedbackType.Success
-    );
+    //physical vibration to help you know that your journal has been saved
+    await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 
 alert('Saved successfully!');
   } catch (err) {
@@ -80,7 +79,7 @@ alert('Saved successfully!');
           placeholderTextColor="#8d949c"
           multiline
           value={oddity}
-          onChangeText={setOddity}
+          onChangeText={setOddity} //saves what is being written dynamically
         />
 
         {/* MOOD */}
@@ -109,19 +108,6 @@ alert('Saved successfully!');
           ))}
         </View>
 
-        {/* HIGHLIGHT */}
-        <Text style={globalStyles.sectionTitle}>Highlight of the Day</Text>
-        <Text style={globalStyles.promptText}>
-          Optional: Share a memory, moment, or photo from today.
-        </Text>
-        <TextInput
-          style={globalStyles.input}
-          placeholder="Optional highlight..."
-          placeholderTextColor="#8d949c"
-          multiline
-          value={highlight}
-          onChangeText={setHighlight}
-        />
 
         {/* PHOTO PLACEHOLDER */}
         <TouchableOpacity style={globalStyles.imageUploadBox} activeOpacity={0.7}>
