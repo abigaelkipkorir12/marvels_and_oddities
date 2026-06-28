@@ -243,4 +243,15 @@ authContainer: {
   paddingHorizontal: spacing.lg,
   backgroundColor: colors.background,
 },
+
+logoutButton:{
+   alignSelf: 'center', 
+   marginTop: 20 
+},
+
+logoutText:{
+  color: colors.muted,
+  fontSize: 15,
+}
+
 });

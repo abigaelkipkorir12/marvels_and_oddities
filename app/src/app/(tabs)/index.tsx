@@ -1,7 +1,18 @@
+import { useState } from 'react';
+import {
+  Alert,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+
 import { globalStyles } from '@/styles/global';
-import { ScrollView, Text, View } from 'react-native';
+import { supabase } from '@/utils/supabaseClient';
 
 export default function HomeScreen() {
+  const [loading, setLoading] = useState(false);
+
   const today = new Date();
 
   const formattedDate = today.toLocaleDateString('en-US', {
@@ -11,13 +22,35 @@ export default function HomeScreen() {
     year: 'numeric',
   });
 
+  const handleLogout = async () => {
+    try {
+      setLoading(true);
+
+      const { error } = await supabase.auth.signOut();
+
+      if (error) {
+        Alert.alert('Logout Failed', error.message);
+        return;
+      }
+
+      // RootLayout will detect the session ending
+      // and automatically redirect to the login screen.
+    } catch (err) {
+      console.error(err);
+      Alert.alert('Error', 'Something unexpected went wrong.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <ScrollView style={globalStyles.screen}>
       <View style={globalStyles.homeContainer}>
         <Text style={globalStyles.title}>Marvels & Oddities</Text>
 
         <Text style={globalStyles.heroQuote}>
-          “Maybe that is what living is — recognizing the marvels and oddities around you.”
+          "Maybe that is what living is — recognizing the marvels and oddities
+          around you."
         </Text>
 
         <Text style={globalStyles.dateText}>{formattedDate}</Text>
@@ -26,7 +59,8 @@ export default function HomeScreen() {
           <Text style={globalStyles.infoTitle}>Marvels</Text>
 
           <Text style={globalStyles.infoDescription}>
-            This way of noticing that even during the suckiest moments in life, there was something marvelous…
+            This way of noticing that even during the suckiest moments in life,
+            there was something marvelous…
           </Text>
         </View>
 
@@ -37,6 +71,16 @@ export default function HomeScreen() {
             The strange, difficult, confusing, or unexpected parts of the day.
           </Text>
         </View>
+
+        <TouchableOpacity
+          style={globalStyles.logoutButton}
+          onPress={handleLogout}
+          disabled={loading}
+        >
+          <Text style={globalStyles.logoutText}>
+            {loading ? 'Logging Out...' : 'Log Out'}
+          </Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
