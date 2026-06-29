@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Alert,
   ScrollView,
@@ -12,9 +12,13 @@ import { supabase } from '@/utils/supabaseClient';
 
 export default function HomeScreen() {
   const [loading, setLoading] = useState(false);
-
+  const [streak, setStreak] = useState(0);
+  
+    useEffect(() => {
+      calculateStreak();
+  }, []);
+  
   const today = new Date();
-
   const formattedDate = today.toLocaleDateString('en-US', {
     weekday: 'long',
     month: 'long',
@@ -42,6 +46,38 @@ export default function HomeScreen() {
       setLoading(false);
     }
   };
+
+const calculateStreak = async () => {
+  //gets the currently authenticated user
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  //edge case
+  if (authError || !user) {
+    Alert.alert(
+      "Authentication Error",
+      "Please log in again."
+    );
+    return;
+  }
+
+  const { data, error } = await supabase
+    .from("marvel_and_oddities")
+    .select("date")
+    .eq("user_id", user.id)
+    .order("date", { ascending: false });
+
+  if (error) {
+    console.log(error);
+    return;
+  }
+
+  console.log(data);
+};
+
+
 
   return (
     <ScrollView style={globalStyles.screen}>
