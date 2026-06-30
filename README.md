@@ -135,7 +135,7 @@ Instead of allowing unlimited journal entries, I implemented a business rule lim
 
 ### Reflection Streaks
 
-Rather than storing streak values separately, the application calculates streaks dynamically from authenticated journal history(date entries) I did this to avoid maintaining duplicate state which could lead to bugs. This also ensures that the displayed streak always reflects the underlying journal data.
+Rather than storing streak values separately, the application calculates streaks dynamically from authenticated journal history(date entries). Doing this avoids maintaining duplicate state which could lead to bugs. This also ensures that the displayed streak always reflects the underlying journal data.
 
 ### Mobile-First Design
 
@@ -182,7 +182,7 @@ The application was designed specifically as a mobile experience using React Nat
 * Search and filtering
 * Push notification reminders
 * "On This Day" reflections
-* Meeting ccessibility requirements
+* Meeting accessibility requirements
 
 ---
 
