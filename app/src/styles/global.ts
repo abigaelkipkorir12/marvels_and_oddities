@@ -260,5 +260,29 @@ logoutText: {
   fontSize: 15,
   fontWeight: '600',
 },
+streakBox: {
+  backgroundColor: colors.white,
+  borderRadius: radius.lg,
+  padding: spacing.lg,
+  marginBottom: spacing.lg,
+  alignItems: 'center',
+},
+
+streakIcon: {
+  marginBottom: spacing.sm,
+},
+
+streakTitle: {
+  fontSize: 28,
+  fontWeight: '700',
+  color: colors.text,
+},
+
+streakSubtitle: {
+  fontSize: 15,
+  color: colors.textSecondary,
+  fontStyle: 'italic',
+  marginTop: spacing.xs,
+},
 
 });

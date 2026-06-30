@@ -48,33 +48,65 @@ export default function HomeScreen() {
   };
 
 const calculateStreak = async () => {
-  //gets the currently authenticated user
-  const {
-    data: { user },
-    error: authError,
-  } = await supabase.auth.getUser();
+  try {
+    //gets the currently authenticated user
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
 
-  //edge case
-  if (authError || !user) {
+    //edge case
+    if (authError || !user) {
+      Alert.alert(
+        "Authentication Error",
+        "Please log in again."
+      );
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from("marvel_and_oddities")
+      .select("date")
+      .eq("user_id", user.id)
+      .order("date", { ascending: false });
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    let streakCount = 0;
+
+    //normalize everything to midnight
+    let expectedDate = new Date();
+    expectedDate.setHours(0, 0, 0, 0);
+
+    for (const journal of data ?? []) {
+      const journalDate = new Date(journal.date);
+
+      //normalize everything to midnight
+      journalDate.setHours(0, 0, 0, 0);
+
+      if (journalDate.getTime() === expectedDate.getTime()) {
+        streakCount++;
+
+        //previous day
+        expectedDate.setDate(expectedDate.getDate() - 1);
+      } else {
+        break;
+      }
+    }
+
+    setStreak(streakCount);
+
+    console.log("Current Streak:", streakCount);
+  } catch (err) {
+    console.error(err);
     Alert.alert(
-      "Authentication Error",
-      "Please log in again."
+      "Error",
+      "Something unexpected went wrong."
     );
-    return;
   }
-
-  const { data, error } = await supabase
-    .from("marvel_and_oddities")
-    .select("date")
-    .eq("user_id", user.id)
-    .order("date", { ascending: false });
-
-  if (error) {
-    console.log(error);
-    return;
-  }
-
-  console.log(data);
 };
 
 
