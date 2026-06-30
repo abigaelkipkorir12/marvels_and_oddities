@@ -1,3 +1,6 @@
+import { colors, globalStyles } from '@/styles/global';
+import { supabase } from '@/utils/supabaseClient';
+import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import {
   Alert,
@@ -6,9 +9,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
-import { globalStyles } from '@/styles/global';
-import { supabase } from '@/utils/supabaseClient';
 
 export default function HomeScreen() {
   const [loading, setLoading] = useState(false);
@@ -122,6 +122,22 @@ const calculateStreak = async () => {
         </Text>
 
         <Text style={globalStyles.dateText}>{formattedDate}</Text>
+        <View style={globalStyles.streakBox}>
+        <Ionicons
+          name="checkmark-circle-outline"
+          size={34}
+          color={colors.primary}
+          style={globalStyles.streakIcon}
+        />
+         <Text style={globalStyles.streakSubtitle}>
+          You've reflected for
+        </Text>
+        <Text style={globalStyles.streakTitle}>
+          {streak} Day{streak !== 1 ? 's' : ''}
+        </Text>
+
+       
+      </View>
 
         <View style={globalStyles.infoBox}>
           <Text style={globalStyles.infoTitle}>Marvels</Text>
