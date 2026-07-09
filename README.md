@@ -30,9 +30,38 @@ Marvels & Oddities transforms that daily practice into a dedicated mobile applic
 
 ---
 
+
+
 ## Screenshots
 
-> *Screenshots coming soon.*
+<table>
+<tr>
+<td align="center"><b>Login</b></td>
+<td align="center"><b>Home</b></td>
+<td align="center"><b>Add Journal</b></td>
+<td align="center"><b>History</b></td>
+</tr>
+
+<tr>
+<td>
+<img src="screenshots/login_page.png" width="220">
+</td>
+
+<td>
+<img src="screenshots/home_page.png" width="220">
+</td>
+
+<td>
+<img src="screenshots/add_journal1.png" width="220">
+</td>
+
+<td>
+<img src="screenshots/journal_history.png" width="220">
+</td>
+</tr>
+</table>
+
+> *The Add Journal screen is scrollable. A partial view is shown above.*
 
 ---
 
