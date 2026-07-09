@@ -1,212 +1,134 @@
 # Marvels & Oddities
 
-*A full-stack mobile journaling application inspired by a daily reflection practice from S.K. Ali's* Love from A to Z.
-
-Built with **React Native**, **Supabase**, and **PostgreSQL**.
+*A mobile reflection application that transforms a personal daily journaling habit into a secure full-stack experience built with React Native, Supabase, and PostgreSQL.*
 
 ---
 
-# Overview
+## Why I Built It
 
-Marvels & Oddities is a mobile journaling application designed to encourage intentional daily reflection.
+Before moving from Kenya to attend Duke University, I read *Love from A to Z* by S.K. Ali, where the reader experiences the love story of the main characters through their  **Marvels** and **Oddities**.
 
-Each day, users record:
+As I prepared to leave home and begin university in a completely unfamiliar country, I adopted the same habit using a simple Google Form.
 
-* **A Marvel** — something meaningful, joyful, or worth appreciating.
-* **An Oddity** — something frustrating, difficult, or unexpected.
-* **A daily mood rating** (1–5).
+Over time, I noticed something interesting.
 
-To encourage consistency, the application limits users to **one journal entry per day** and tracks their current reflection streak over time.
+Many of the things that once felt overwhelming gradually disappeared, while small moments of gratitude remained meaningful. The habit became less about recording events and more about intentionally reflecting on each day.
 
-All journal entries are securely associated with authenticated users and stored in PostgreSQL through Supabase.
+Marvels & Oddities transforms that daily practice into a dedicated mobile application.
 
 ---
 
-# Why I Built This
+## Features
 
-Before moving from Kenya to attend Duke University, I read *Love from A to Z*, a novel that introduced the idea of recording life's "Marvels" and "Oddities."
-
-At the time, I was preparing for one of the biggest transitions of my life—leaving home, moving across the world, and beginning university in a completely unfamiliar environment.
-
-Inspired by the book, I created a simple Google Form to record one Marvel, one Oddity, and my mood every day.
-
-Over time I realized something interesting.
-
-Many of the problems that once felt overwhelming had faded in importance, while small moments of gratitude and growth remained meaningful.
-
-Marvels & Oddities transforms that personal reflection habit into a dedicated mobile application.
+- Secure email/password authentication
+- One journal entry per day
+- Marvel, Oddity, and daily mood tracking
+- Reflection streaks
+- Journal history
+- PostgreSQL-backed cloud storage
+- User-specific data ownership through Row Level Security (RLS)
 
 ---
 
-# Current Features
+## Screenshots
 
-### Secure Authentication
-
-* Email/password authentication using Supabase Auth
-* Session persistence
-* Protected application routes
-* Secure logout
-
-### Daily Journaling
-
-* Record one Marvel
-* Record one Oddity
-* Rate the day from 1–5
-* Automatically stores the journal date
-
-### User Ownership
-
-Every journal entry is securely associated with its authenticated owner using UUID-based user identifiers.
-
-Users can only access their own reflections.
-
-### One Journal Per Day
-
-The application prevents multiple journal entries on the same day by checking for an existing reflection before allowing a new submission.
-
-### Reflection Streaks
-
-Calculates consecutive daily journaling streaks from user history to encourage consistent reflection.
-
-### Journal History
-
-Browse previous reflections in reverse chronological order.
-
-### Cloud Persistence
-
-All data is stored using Supabase and PostgreSQL.
+> *Screenshots coming soon.*
 
 ---
 
-# Technical Stack
+## Tech Stack
 
-## Frontend
-
-* React Native
-* Expo
-* TypeScript
-
-## Backend
-
-* Supabase
-
-## Database
-
-* PostgreSQL
+| Layer | Technology |
+|--------|------------|
+| Frontend | React Native, Expo, TypeScript |
+| Backend | Supabase |
+| Database | PostgreSQL |
+| Authentication | Supabase Auth |
 
 ---
 
-# Architecture
+## Architecture
 
 ```text
-React Native App
-        │
-        ▼
- Supabase Authentication
-        │
-        ▼
- Session Management
-        │
-        ▼
- Supabase Database
-        │
-        ▼
- PostgreSQL
+               React Native App
+                      │
+                      ▼
+            Supabase Authentication
+                      │
+                      ▼
+           Application Business Logic
+                      │
+                      ▼
+              Supabase Database API
+                      │
+                      ▼
+                  PostgreSQL
 ```
 
----
+## Engineering Decisions
 
+### Secure Data Ownership
 
-# Engineering Decisions
+Every journal entry is associated with an authenticated user through Supabase Auth and UUID-based ownership.
 
-Developing Marvels & Oddities required making several decisions to balanced user experience, security, and data integrity.
+Rather than relying solely on client-side validation, PostgreSQL Row Level Security (RLS) enforces that users can only access their own journal entries.
 
-### Secure User Ownership
+### One Reflection Per Day
 
-Rather than storing journal entries anonymously, every journal is associated with an authenticated user through a UUID-based relationship with Supabase Auth. This allows every reflection to belong to a single user while supporting secure access control.
+Instead of allowing unlimited journal entries, the application enforces a single reflection each day.
 
-### Protecting User Data
-
-Authentication alone could not guarantee that it would prevent unauthorized access. I implemented Row Level Security (RLS) policies so PostgreSQL enforces that users can only read and create their own journal entries, even if someone attempts to bypass the frontend.
-
-### One Journal Per Day
-
-Instead of allowing unlimited journal entries, I implemented a business rule limiting users to one reflection each day. The application checks for an existing journal before displaying the form, while the database architecture supports enforcing this rule consistently.
+This rule is implemented through application logic while keeping the database model simple and consistent.
 
 ### Reflection Streaks
 
-Rather than storing streak values separately, the application calculates streaks dynamically from authenticated journal history(date entries). Doing this avoids maintaining duplicate state which could lead to bugs. This also ensures that the displayed streak always reflects the underlying journal data.
+Rather than storing streak values directly, streaks are calculated dynamically from authenticated journal history.
 
-### Mobile-First Design
-
-The application was designed specifically as a mobile experience using React Native, emphasizing a calm, distraction-free interface that encourages consistent daily reflection.
+This avoids maintaining duplicate state while ensuring streaks always reflect the underlying journal data.
 
 ---
 
-# Example Journal Entry
+## Running Locally
 
-```json
-{
-  "id": "entry_id",
-  "user_id": "14c81e70-9fc8-4ee1-98e7-c977b18118f2",
-  "date": "2026-06-28",
-  "mood": 4,
-  "marvel": "Had a meaningful conversation with a friend.",
-  "oddity": "Missed the bus to class."
-}
+```bash
+git clone https://github.com/your-username/Marvels_and_Oddities.git
+
+cd Marvels_and_Oddities/app
+
+npm install
+
+npx expo start
 ```
 
-
-# Roadmap
-
-## Implemented
-
-* User authentication
-* Protected routes
-* Session persistence
-* Secure logout
-* User-specific journal ownership
-* One journal entry per day
-* Reflection streak tracking
-* Journal creation
-* Journal history
-* Mood tracking
-* Supabase integration
-* PostgreSQL persistence
-
-## Planned
-
-* Photo uploads for daily highlights
-* Weekly and monthly reflection summaries
-* Mood analytics and visualizations
-* Search and filtering
-* Push notification reminders
-* "On This Day" reflections
-* Meeting accessibility requirements
+Create a `.env` file using `.env.example` and provide your Supabase credentials.
 
 ---
 
+## Roadmap
 
-# Lessons Learned
-**Just do the hard thing.**
+### ✅ Completed
 
-This project started as a personal side project inspired by a daily habit, but it quickly became one of the best learning experiences I've had. Every feature pushed me into concepts I had never implemented before—from authentication and secure database design to Row Level Security, relational databases, and business logic.
+- [x] User authentication
+- [x] Journal creation
+- [x] Journal history
+- [x] Reflection streak tracking
+- [x] PostgreSQL persistence
+- [x] Row Level Security (RLS)
 
-There were many moments where I didn't know how to implement a feature or where to even begin. Rather than avoiding those parts, I learnt how to build through the uncertainty, one problem at a time.
+### 🚧 Planned
 
-Looking back, this project taught me far more than how to build a mobile application. It taught me how to think about software as a complete system—where the frontend, backend, database, and security model all work together to create a reliable user experience.
-
+- [ ] Weekly reflection summaries
+- [ ] Mood analytics and visualizations
+- [ ] Photo attachments
+- [ ] Search and filtering
+- [ ] Push notification reminders
+- [ ] Accessibility improvements
 
 ---
 
-# Project Status
+## Lessons Learned
 
-Marvels & Oddities is an actively developed personal project created both as a daily reflection tool and as a demonstration of full-stack mobile software engineering.
+This project taught me much more than React Native.
 
----
+It taught me how frontend, backend, authentication, databases, and security all work together to create a reliable application.
 
-# Author
-
-**Abigael Chemutai Kipkorir**
-
-Duke University
+More importantly, it reinforced my systems thinking as I was solving—designing systems where architecture, data integrity, and maintainability are considered from the beginning rather than added later.
