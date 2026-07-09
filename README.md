@@ -134,7 +134,7 @@ Create a `.env` file using `.env.example` and provide your Supabase credentials.
 
 ## Roadmap
 
-### ✅ Completed
+### Completed
 
 - [x] User authentication
 - [x] Journal creation
@@ -143,7 +143,7 @@ Create a `.env` file using `.env.example` and provide your Supabase credentials.
 - [x] PostgreSQL persistence
 - [x] Row Level Security (RLS)
 
-### 🚧 Planned
+### Planned
 
 - [ ] Weekly reflection summaries
 - [ ] Mood analytics and visualizations
